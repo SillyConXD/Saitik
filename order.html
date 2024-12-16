@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ товара</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Форма заказа</h2>
+        <form id="userForm">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Телефон:</label>
+            <input type="text" id="phone" required>
+
+            <label for="date">Дата:</label>
+            <input type="date" id="date" required>
+
+            <label for="comment">Комментарий:</label>
+            <textarea id="comment" rows="4"></textarea>
+
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <script>
+        const h1 = document.querySelector('h2');
+        if (h1) h1.textContent = "Форма заказа"; // Изменяем заголовок формы
+
+        const firstParagraph = document.querySelector('p');
+        if (firstParagraph) firstParagraph.textContent = "Это новый текст параграфа."; // Изменяем текст первого параграфа (если он есть)
+
+        const video = document.querySelector('video');
+        if (video) video.style.display = 'none'; // Скрываем видео (если оно есть)
+
+        let formData = {
+            name: '',
+            email: '',
+            phone: '',
+            date: '',
+            comment: '',
+            printData: function () {
+                console.log(`Имя: ${this.name}`);
+                console.log(`E-mail: ${this.email}`);
+                console.log(`Телефон: ${this.phone}`);
+                console.log(`Дата: ${this.date}`);
+                console.log(`Комментарий: ${this.comment}`);
+            }
+        };
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const name = document.querySelector('#name').value.trim();
+            const email = document.querySelector('#email').value.trim();
+            const phone = document.querySelector('#phone').value.trim();
+            const date = document.querySelector('#date').value.trim();
+            const comment = document.querySelector('#comment').value.trim();
+
+            if (!name || !email || !comment) {
+                alert('Поля "Имя", "E-mail" и "Комментарий" должны быть заполнены!');
+                return;
+            }
+            if (!/^\d+$/.test(phone)) {
+                alert('Телефон должен содержать только цифры!');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Введите корректный E-mail!');
+                return;
+            }
+
+            const formData = {
+                name,
+                email,
+                phone,
+                date,
+                comment,
+            };
+
+            localStorage.setItem('formData', JSON.stringify(formData));
+
+            console.log('Данные формы сохранены:');
+            console.log(`Имя: ${formData.name}`);
+            console.log(`E-mail: ${formData.email}`);
+            console.log(`Телефон: ${formData.phone}`);
+            console.log(`Дата: ${formData.date}`);
+            console.log(`Комментарий: ${formData.comment}`);
+
+            alert('Форма успешно отправлена!');
+        }
+
+        const form = document.querySelector('#userForm');
+        if (form) {
+            form.addEventListener('submit', submitForm);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedData = localStorage.getItem('formData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                document.querySelector('#name').value = formData.name || '';
+                document.querySelector('#email').value = formData.email || '';
+                document.querySelector('#phone').value = formData.phone || '';
+                document.querySelector('#date').value = formData.date || '';
+                document.querySelector('#comment').value = formData.comment || '';
+            }
+        });
+    </script>
+</body>
+</html>

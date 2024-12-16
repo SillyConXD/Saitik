@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой учебный сайт</title>
+    <link rel="stylesheet" href="d1.css">
+    <script src="script.js" defer></script> 
+</head>
+
+<header>
+    <div class="logo">
+        <img src="photo_2023-01-31_14-42-41.jpg" alt="Логотип">
+    </div>
+    <div class="group-info">
+        <span>Группа: ЭФБО-08-23</span><br>
+        <span>Боголепов Максим Леонидович</span>
+    </div>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="d3.html">Первый семестр</a>
+    <a href="#">Второй семестр</a>
+    <a href="d2.html">Услуги</a>
+    <a href="#">Авторизация</a>
+</nav>
+
+<div class="content">
+    <aside class="sidebar">
+        <h3>Навигация по странице</h3>
+        <ul>
+            <li><a href="#frontend">Фронтенд</a></li>
+            <li><a href="#backend">Бэкенд</a></li>
+        </ul>
+    </aside>
+
+    <section class="content">
+        <h1>Добро пожаловать на наш сайт</h1>
+        <p>Меня зовут Боголепов Максим Леонидович и я начинающий специалист по веб-разработке.</p>
+        <img 
+            id="studentPhoto" 
+            src="https://sun9-5.userapi.com/impg/0ae1ju2syVIQsI6ZJ5rp7LByekdDFT7VH76gGA/QtrxOLLuh3A.jpg?size=960x1280&quality=95&sign=6c64bcad8aca47e90f18c19053b4f1d6&type=album" 
+            alt="Profile Picture" 
+            width="200px"
+            style="transition: transform 0.3s ease;">
+    </section>
+</div>
+
+<div id="primer">
+    <div id="frontend">
+        <h2 class="qwerty">Фронтенд</h2>
+        <p class="qwerty">Фронтенд (или клиентская часть) — это то, что видит пользователь. Он включает в себя все визуальные элементы веб-сайта или приложения: кнопки, формы, изображения и текст. 
+            Фронтенд разработчики используют языки разметки и стилизации, такие как HTML, CSS и JavaScript, чтобы создавать интерактивные и привлекательные интерфейсы. Основная задача фронтенда — обеспечить удобство использования и эстетическую привлекательность.</p>
+        <video controls width="400">
+            <source src="small.mp4" type="video/mp4">
+            Ваш браузер не поддерживает тег video.
+        </video>
+    </div>
+    <div id="backend">
+        <h2>Бэкенд</h2>
+        <p>Бэкенд (или серверная часть) — это "за кулисами" веб-приложения. Он отвечает за обработку данных, управление пользователями и взаимодействие с базами данных. 
+            Бэкенд разработчики используют языки программирования, такие как Python, Ruby, Java или PHP, а также фреймворки и базы данных для создания логики приложения. 
+            Основная задача бэкенда — обеспечить стабильную работу приложения и безопасность данных.</p>
+        <video controls width="400">
+            <source src="big.mov" type="video/mp4">
+            Ваш браузер не поддерживает тег video.
+        </video>
+    </div>
+</div>
+
+
+
+<script>
+    const h1 = document.querySelector('h1');
+    if (h1) h1.textContent = "Добро пожаловать на наш сайт!";
+
+    const h2 = document.querySelector('h2');
+    if (h2) h2.style.color = 'red';
+
+    const firstParagraph = document.querySelector('p');
+    if (firstParagraph) firstParagraph.textContent = "Это новый текст параграфа.";
+
+    const video = document.querySelector('video');
+    if (video) video.style.display = 'none';
+
+    const studentPhoto = document.getElementById('studentPhoto');
+
+    studentPhoto.addEventListener('mouseover', () => {
+        studentPhoto.style.transform = 'scale(1.1)';
+    });
+
+    studentPhoto.addEventListener('mouseout', () => {
+        studentPhoto.style.transform = 'scale(1)';
+    });
+
+    studentPhoto.addEventListener('click', () => {
+        studentPhoto.src = 'https://i.pinimg.com/originals/78/79/fb/7879fbc1546bb39bc5f9c0f835dfe558.jpg';
+        studentPhoto.alt = 'Фотография любимого преподавателя';
+    });
+
+    studentPhoto.addEventListener('dblclick', () => {
+        alert('Не налегай, у меня не так много любимых преподавателей!');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const paragraph = document.querySelector('p'); 
+        if (paragraph) {
+            paragraph.addEventListener('click', () => {
+                paragraph.classList.add('animated-bg');
+                setTimeout(() => {
+                    paragraph.classList.remove('animated-bg');
+                }, 2000); 
+            });
+        }
+
+        studentPhoto.addEventListener('mouseover', () => {
+            studentPhoto.style.transition = 'transform 0.6s ease'; 
+            studentPhoto.style.transform = 'rotate(360deg)';
+        });
+
+        studentPhoto.addEventListener('mouseout', () => {
+            studentPhoto.style.transition = 'transform 0.6s ease'; 
+            studentPhoto.style.transform = 'rotate(0deg)'; 
+        });
+    });
+
+</script>
+
+<footer>
+    <p>&copy; Боголепов Максим Леонидович, 2024</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
